@@ -2,3 +2,4 @@
 bin/
 obj/
 The Code.csproj
+*.exe
