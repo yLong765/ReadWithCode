@@ -31,9 +31,9 @@ class PoolAllocator
 	{
 		void *newBlock = operator new(BlockSize);
 		((pool_pointer)newBlock)->next = currentBlock;
-		currentBlock = (pool_pointer)newBlock;						 // 开始第一字节存储下一个块的地址
+		currentBlock = (pool_pointer)newBlock; // 开始第一字节存储下一个块的地址
 		currentSlot = (pool_pointer)newBlock + sizeof(pool_pointer); // 存储位置为第二字节
-		lastSlot = (pool_pointer)newBlock + BlockSize;				 // 分配内存块大小
+		lastSlot = (pool_pointer)newBlock + BlockSize; // 分配内存块大小
 	}
 	// 分配
 	pointer allocator()
