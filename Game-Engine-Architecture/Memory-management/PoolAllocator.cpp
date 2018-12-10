@@ -6,8 +6,8 @@ using namespace std;
 template <typename T, size_t BlockSize = 16>
 class PoolAllocator
 {
-public:
-	typedef T* pointer;
+  public:
+	typedef T *pointer;
 
 	PoolAllocator()
 	{
@@ -19,9 +19,10 @@ public:
 	~PoolAllocator()
 	{
 		pool_pointer curr = currentBlock;
-		while (curr != NULL) {
+		while (curr != NULL)
+		{
 			pool_pointer prev = curr->next;
-			operator delete((void *)curr);								// 释放块内存
+			operator delete((void *)curr); // 释放块内存
 			curr = prev;
 		}
 	}
@@ -30,9 +31,9 @@ public:
 	{
 		void *newBlock = operator new(BlockSize);
 		((pool_pointer)newBlock)->next = currentBlock;
-		currentBlock = (pool_pointer)newBlock;							// 开始第一字节存储下一个块的地址
-		currentSlot = (pool_pointer)newBlock + sizeof(pool_pointer);	// 存储位置为第二字节
-		lastSlot = (pool_pointer)newBlock + BlockSize;					// 分配内存块大小
+		currentBlock = (pool_pointer)newBlock;						 // 开始第一字节存储下一个块的地址
+		currentSlot = (pool_pointer)newBlock + sizeof(pool_pointer); // 存储位置为第二字节
+		lastSlot = (pool_pointer)newBlock + BlockSize;				 // 分配内存块大小
 	}
 	// 分配
 	pointer allocator()
@@ -62,13 +63,13 @@ public:
 		}
 	}
 
-private:
+  private:
 	struct pool
 	{
 		pool *next;
 	};
 
-	typedef pool* pool_pointer;
+	typedef pool *pool_pointer;
 
 	pool_pointer currentBlock;
 	pool_pointer currentSlot;
@@ -83,6 +84,5 @@ int main()
 	void *p1 = pools.allocator();
 	pools.deallocator(p);
 	void *p2 = pools.allocator();
-	system("pause");
 	return 0;
 }
