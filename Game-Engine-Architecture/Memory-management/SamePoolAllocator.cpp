@@ -1,3 +1,7 @@
+/// Description: 相同大小池分配器
+/// Anthor: Yinl
+/// Reference: Game Engine Architecture
+
 #include <iostream>
 
 using namespace std;

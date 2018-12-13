@@ -1,5 +1,8 @@
+/// Description: 堆栈分配器
+/// Anthor: Yinl
+/// Reference: Game Engine Architecture
+
 #include <iostream>
-#include <assert.h>
 
 using namespace std;
 
