@@ -6,33 +6,34 @@ using namespace std;
 class StackAllocator
 {
   public:
+    typedef uintptr_t U32;
     typedef uintptr_t U32_pointer;
     typedef uint8_t U8;
 
     // 给定总大小，构建一个堆栈分配器
-    explicit StackAllocator(U32_pointer stackSize_bytes)
+    explicit StackAllocator(U32 stackSize_bytes)
     {
-        beginMarker = (U32_pointer)malloc(stackSize_bytes);
-        currMarker = beginMarker;
+        begin_marker = (U32_pointer)malloc(stackSize_bytes);
+        curr_marker = begin_marker;
     }
     ~StackAllocator()
     {
-        free((void *)beginMarker);
+        free((void *)begin_marker);
     }
 
     // 给定内存快大小，从堆栈顶端分配一个新的内存块
-    void *alloc(U32_pointer size_bytes)
+    void *alloc(U32 size_bytes)
     {
-        U32_pointer temp = currMarker;
-        currMarker += size_bytes;
+        U32_pointer temp = curr_marker;
+        curr_marker += size_bytes;
         return (void *)temp;
     }
 
     // 对齐分配内存块,注：“alignment”必须为2的幂（一般为4或16）
-    void *allocateAligned(U32_pointer size_bytes, U32_pointer alignment)
+    void *allocateAligned(U32 size_bytes, U32 alignment)
     {
         // 计算总共要分配的内存量
-        U32_pointer expandedSize_bytes = size_bytes + alignment;
+        U32 expandedSize_bytes = size_bytes + alignment;
 
         // 分配未对齐的内存块
         U32_pointer rawAddress = (U32_pointer)alloc(expandedSize_bytes);
@@ -55,13 +56,13 @@ class StackAllocator
     // 取得指向当前堆栈顶端的标记
     U32_pointer getMarker()
     {
-        return currMarker;
+        return curr_marker;
     }
 
     // 把堆栈回滚至之前的标记
     void freeToMarker(U32_pointer marker)
     {
-        currMarker = marker;
+        curr_marker = marker;
     }
 
     // 回滚对齐分配的内存块
@@ -77,12 +78,12 @@ class StackAllocator
     // 清空整个堆栈
     void Clear()
     {
-        currMarker = beginMarker;
+        curr_marker = begin_marker;
     }
 
   private:
-    U32_pointer beginMarker;
-    U32_pointer currMarker;
+    U32_pointer begin_marker;
+    U32_pointer curr_marker;
 };
 
 int main()
