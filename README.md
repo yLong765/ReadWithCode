@@ -1,7 +1,3 @@
-## 利用代码阅读
-
-自己开一个坑，把阅读过的书籍利用代码展现出来。
-
-### Code :《编码：隐匿在计算机软硬件背后的语言》
-
-### Game-Engine-Architecture :《游戏引擎架构》
+## 目录
+[Code :《编码：隐匿在计算机软硬件背后的语言》](Code/README.md)
+[Game-Engine-Architecture :《游戏引擎架构》](Game-Engine-Architecture/README.md)
