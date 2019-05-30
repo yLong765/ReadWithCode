@@ -1,7 +1,3 @@
----
-title: chapter 5 : 游戏支持系统 
----
-
 ### 内存管理(Memory-management)
 
 #### 堆栈内存分配器(StackAllocator)
