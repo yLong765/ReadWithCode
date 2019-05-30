@@ -2,7 +2,7 @@
 
 - [chapter 5 ：游戏支持系统](chapter5.md)
   - [5.1 : 子系统的启动和终止](chapter5.md)
-  - [5.2 : 内存管理](chapter5.md/#内存管理(Memory-management))
+  - [5.2 : 内存管理](chapter5.md/#nei-cun-guan-li-memorymanagement)
   - [5.3 : 容器](chapter5.md)
   - [5.4 : 字符串](chapter5.md/#zi-fu-chuan)
   - [5.5 : 引擎配置](chapter5.md)
