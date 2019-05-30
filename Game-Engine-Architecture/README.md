@@ -4,6 +4,6 @@
   - [5.1 : 子系统的启动和终止](chapter5.md)
   - [5.2 : 内存管理](chapter5.md/#内存管理(Memory-management))
   - [5.3 : 容器](chapter5.md)
-  - [5.4 : 字符串](chapter5.md/#字符串)
+  - [5.4 : 字符串](chapter5.md/#zi-fu-chuan)
   - [5.5 : 引擎配置](chapter5.md)
 - [chapter 6 : 资源及文件系统](chapter6.md)
