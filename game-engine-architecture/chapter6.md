@@ -11,7 +11,7 @@
 * UNIX使用正斜线符（/），Windows使用反斜线符（\）
 * MacOS 8和9采用冒号（:），也支持（/）
 * UNIX不分卷概念，Windows分卷
-* Windows中远端网络分享可挂接为卷或者双反斜线（\\）
+* Windows中远端网络分享可挂接为卷或者双反斜线（\）
 * DOS和早期Windows中，文件名最长8字符，点后有3字符扩展名
 * UNIX下只有一个当前工作目录，而Windows下，每个卷有其个别当前工作目录
 * Windows有当前工作卷（current working volume）的概念
