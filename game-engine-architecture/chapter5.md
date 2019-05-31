@@ -1,4 +1,4 @@
-# Chapter5 : 游戏支持系统
+# Chapter 5 : 游戏支持系统
 
 ## 内存管理\(Memory-management\)
 
