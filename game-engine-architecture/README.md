@@ -7,4 +7,5 @@
   * [5.4 : 字符串](chapter5.md#zi-fu-chuan)
   * [5.5 : 引擎配置](chapter5.md)
 * [Chapter 6 : 资源及文件系统](chapter6.md)
-
+  * [6.1 : 文件系统](chapter6.md#wen-jian-xi-tong)
+  * [6.2 : 资源管理器](chapter6#zi-yuan-guan-li-qi-resource-manager)
