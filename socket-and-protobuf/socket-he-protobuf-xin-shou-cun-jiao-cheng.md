@@ -1,50 +1,50 @@
-# C# Socket和protoBuf新手村教程
+# C\# Socket和protoBuf新手村教程
 
-## Boss->Socket
+## Boss-&gt;Socket
 
 此教程纯属Socket初级应用篇，因为网上全是理论篇（实践才是王道）
 
-### 1级->Client创建
+### 1级-&gt;Client创建
 
-1. 首先创建一个C#命令行工程（别告诉这个不会）
+1. 首先创建一个C\#命令行工程（别告诉这个不会）
 2. 创建Socket实例，别忘了引用System.Net和System.Net.Sockets
 
-    ``` csharp
+   ```csharp
     Socket client = new Socket(SocketType.Stream, ProtocolType.Tcp); // TCP链接
-    ```
+   ```
 
-    * [Socket](https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket?redirectedfrom=MSDN&view=netframework-4.8)
+   * [Socket](https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket?redirectedfrom=MSDN&view=netframework-4.8)
 
-3. 设置要链接的服务器ip地址，IPAddress是C#提供的ip封装类
+3. 设置要链接的服务器ip地址，IPAddress是C\#提供的ip封装类
 
-    ``` csharp
+   ```csharp
     IPAddress ip = IPAddress.Parse("127.0.0.1"); // 本地地址127.0.0.1（别说你不知道）
-    ```
+   ```
 
-    * [IPAddress](https://docs.microsoft.com/en-us/dotnet/api/system.net.ipendpoint?redirectedfrom=MSDN&view=netframework-4.8)
+   * [IPAddress](https://docs.microsoft.com/en-us/dotnet/api/system.net.ipendpoint?redirectedfrom=MSDN&view=netframework-4.8)
 
-4. 设置要链接的服务器ip和端口，IPEndPoint是C#提供的ip和端口的封装类
+4. 设置要链接的服务器ip和端口，IPEndPoint是C\#提供的ip和端口的封装类
 
-    ``` csharp
+   ```csharp
     IPEndPoint point = new IPEndPoint(ip, 2333); // 端口为2333，ip为上一段代码的ip
-    ```
+   ```
 
 5. 链接
 
-    ``` csharp
+   ```csharp
     client.Connect(point);
     // client.Connect("127.0.0.1", 2333); // 等同于3,4
-    ```
+   ```
 
 6. 开启线程接收服务器消息，别忘了引用System.Threading
 
-    ``` csharp
+   ```csharp
     Thread thread = new Thread(Recive);
     thread.IsBackground = true; // 后台执行线程
     thread.Start(client); // 传入客户端的Socket
-    ```
+   ```
 
-    ```csharp
+   ```csharp
     // Recive函数
     static void Recive(object o)
     {
@@ -61,13 +61,13 @@
             Console.WriteLine(str);
         }
     }
-    ```
+   ```
 
-    * [Recieve函数](https://docs.microsoft.com/zh-cn/dotnet/api/system.net.sockets.socket.receive?redirectedfrom=MSDN&view=netframework-4.8#overloads)
+   * [Recieve函数](https://docs.microsoft.com/zh-cn/dotnet/api/system.net.sockets.socket.receive?redirectedfrom=MSDN&view=netframework-4.8#overloads)
 
 7. 发送自定义数据给服务器
 
-    ``` csharp
+   ```csharp
     while (true)
     {
         string s = Console.ReadLine();
@@ -75,11 +75,11 @@
         socketClient.Send(buffer); // 发送消息
         Console.WriteLine("Send Message");
     }
-    ```
+   ```
 
 8. client完整代码
 
-``` csharp
+```csharp
 using System;
 using System.IO;
 using System.Net;
@@ -130,33 +130,33 @@ namespace SocketTest
 }
 ```
 
-### 2级->Server创建
+### 2级-&gt;Server创建
 
-1. 首先创建一个C#命令行工程（别告诉这个不会）
+1. 首先创建一个C\#命令行工程（别告诉这个不会）
 2. 创建Socket实例（同client）
 3. 设置服务器的ip地址
 
-    ``` csharp
+   ```csharp
     IPAddress ip = IPAddress.Parse("127.0.0.1");
     IPEndPoint point = new IPEndPoint(ip, 2333);
     server.Bind(point);
-    ```
+   ```
 
 4. 设置服务器的最大监听数
 
-    ``` cs
+   ```csharp
     server.Listen(10);
-    ```
+   ```
 
 5. 开启线程接收客户端连接和数据（※注意是连接）
 
-    ``` cs
+   ```csharp
     Thread thread = new Thread(Listen);
     thread.IsBackground = true;
     thread.Start(serverSocket);
-    ```
+   ```
 
-    ``` cs
+   ```csharp
     // Listen函数，等待客户端连接
     static void Listen(object o)
     {
@@ -172,15 +172,15 @@ namespace SocketTest
             thread.Start(client);
         }
     }
-    ```
+   ```
 
-    ``` cs
+   ```csharp
     // Recive函数，同客户端
-    ```
+   ```
 
 6. server完整代码
 
-``` cs
+```csharp
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -239,22 +239,22 @@ namespace SocketServer
 }
 ```
 
-## Boss->ProtoBuf
+## Boss-&gt;ProtoBuf
 
-如果我们要用ProtoBuf用在C#中就得集齐各种神器
+如果我们要用ProtoBuf用在C\#中就得集齐各种神器
 
-1. [ProtoBuf源码](https://github.com/protocolbuffers/protobuf/tree/v3.8.0)：其中有C#的示例代码
+1. [ProtoBuf源码](https://github.com/protocolbuffers/protobuf/tree/v3.8.0)：其中有C\#的示例代码
 2. [ProtoBuf编译器](https://github.com/protocolbuffers/protobuf/releases/tag/v3.8.0)：编译`.proto`文件
-3. [ProtoBuf的C#工具集](https://www.nuget.org/packages/Google.Protobuf/3.8.0)(你可能会需要下载nuget)：提供工程中的dll引用文件
-4. [ProtoBuf官方教程](https://developers.google.com/protocol-buffers/)(科学上网)
+3. [ProtoBuf的C\#工具集](https://www.nuget.org/packages/Google.Protobuf/3.8.0)\(你可能会需要下载nuget\)：提供工程中的dll引用文件
+4. [ProtoBuf官方教程](https://developers.google.com/protocol-buffers/)\(科学上网\)
 
-### 1级->编写proto文件
+### 1级-&gt;编写proto文件
 
-都说ProtoBuf不依赖于任何语言是一个跨语言的神器，然而他的语言格式是scheme(Lisp的方言)，并且编译器就是把`.proto`文件翻译成各个不同语言的编译器。
+都说ProtoBuf不依赖于任何语言是一个跨语言的神器，然而他的语言格式是scheme\(Lisp的方言\)，并且编译器就是把`.proto`文件翻译成各个不同语言的编译器。
 
-proto文件示例(教程中示例的文件)
+proto文件示例\(教程中示例的文件\)
 
-``` scheme
+```scheme
 // [START declaration]
 syntax = "proto3";
 package tutorial;
@@ -300,11 +300,11 @@ message AddressBook {
 // [END messages]
 ```
 
-### 2级->编译proto文件
+### 2级-&gt;编译proto文件
 
 将上面的文件用proto.exe编译
 
-``` vim
+```text
 格式：proto -I=当前目录 -out_csharp=当前目录 目录/文件名.扩展名
 例：
 文件名为：address.proto
@@ -314,25 +314,25 @@ proto -I=D:/Work -out_csharp=D:/Work D:/Wrok/address.proto
 
 编译完后会生成一个`.cs`文件，文件很长我就不展示了
 
-### 3级->nuget下载dll
+### 3级-&gt;nuget下载dll
 
-``` cs
+```csharp
 nuget install Google.Protobuf -Version 3.8.0 // 版本随意
 ```
 
 下载下来找到dll
 
-``` vim
+```text
 Google.Protobuf.3.8.0/bin/net45/Google.Protobuf.dll
 ```
 
 引用到客户端和服务器中，然后把生成的`.cs`文件也复制到项目中
 
-### 4级->编写序列化和反序列化代码
+### 4级-&gt;编写序列化和反序列化代码
 
-在客户端和服务器的Program（上面的代码）中加入序列化和反序列化的函数，需要引用Google.Protobuf、Google.Protobuf.Examples.AddressBook和static Google.Protobuf.Examples.AddressBook.Person.Types(C#6 才支持)
+在客户端和服务器的Program（上面的代码）中加入序列化和反序列化的函数，需要引用Google.Protobuf、Google.Protobuf.Examples.AddressBook和static Google.Protobuf.Examples.AddressBook.Person.Types\(C\#6 才支持\)
 
-``` cs
+```csharp
 public static byte[] Serialize<T>(T obj) where T : IMessage
 {
     return obj.ToByteArray();
@@ -349,12 +349,12 @@ public static T Deserialize<T>(byte[] data) where T : class, IMessage, new()
 注释：
 
 1. 可以看到由`.proto`转换成`.cs`的文件的父接口为IMessage
-2. ToByteArray()是protoBuf自带的类转二进制的函数（所谓的序列化）
+2. ToByteArray\(\)是protoBuf自带的类转二进制的函数（所谓的序列化）
 3. obj.Descriptor.Parser.ParseFrom是是protoBuf自带的二进制转类的函数（所谓的反序列化）
 
 知道这些之后就可以传输二进制数据啦，所以我们的客户端代码的发送数据部分改为
 
-``` cs
+```csharp
 // 建立数据
 Person john = new Person
 {
@@ -375,7 +375,7 @@ while (true)
 
 服务端的接受部分改一下，这部分注意反序列化素组的长度必须和序列化后的一致，所以这边新建了一个正确长度的b2数组把数据复制过去
 
-``` cs
+```csharp
 static void Recive(object o)
 {
     var send = o as Socket;
@@ -400,3 +400,4 @@ static void Recive(object o)
 ```
 
 完结撒花~
+
