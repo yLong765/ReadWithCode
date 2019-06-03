@@ -2,7 +2,7 @@
 
 ## 内存管理\(Memory-management\)
 
-#### 堆栈内存分配器\(StackAllocator\)：([Code](code/chapter5/memory-management/StackAllocator.cpp))
+#### 堆栈内存分配器\(StackAllocator\)：\([Code](https://github.com/yLong765/ReadWithCode/tree/b0dc9781e492fae5c57a822809d91962ea2239a5/game-engine-architecture/code/chapter5/memory-management/StackAllocator.cpp)\)
 
 首先申请一大块连续内存（malloc\(\)、全局new、声明全局字节数组）。安排一个指针指向堆栈的顶端，指针以下的内存是已分配的，指针以上的内存是未分配的。分配请求，仅需吧指针往上移动请求所需的字节量。释放请求，只需把指针下移该内存块的字节量（注：不能任意次序释放，必须以分配时相反的次序释放内存）
 
