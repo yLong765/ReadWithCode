@@ -8,5 +8,5 @@
   * [5.5 : 引擎配置](chapter5.md)
 * [Chapter 6 : 资源及文件系统](chapter6.md)
   * [6.1 : 文件系统](chapter6.md#wen-jian-xi-tong)
-  * [6.2 : 资源管理器](https://github.com/yLong765/ReadWithCode/tree/1b3ef9e525729218eab5b8dbb0677b246e6b55c4/game-engine-architecture/chapter6/README.md#zi-yuan-guan-li-qi-resource-manager)
+  * [6.2 : 资源管理器](chapter6.md#zi-yuan-guan-li-qi-resource-manager)
 
