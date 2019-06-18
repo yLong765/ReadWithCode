@@ -7,3 +7,8 @@
   * [向量投影](chapter2.md#xiang-liang-tou-ying)
   * [外积](chapter2.md#wai-ji)
 * [Chapter 3 ：矩阵](chapter3.md)
+  * [性质](chapter3.md#xing-zhi)
+  * [线性方程组](chapter3.md#xian-xing-fang-cheng-zu)
+  * [逆矩阵](chapter3.md#ni-ju-zhen)
+  * [行列式](chapter3.md#hang-lie-shi)
+* [Chapter 4 ：坐标变换](chapter4.md)
