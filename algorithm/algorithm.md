@@ -69,3 +69,41 @@ bool func(vector<int> rec1, vector<int> rec2)
 }
 ```
 
+### Knuth重排算法
+
+```c#
+int array[n];
+for (int i = 0; i < n; i++)
+{
+	int r = Random.Range(i, n);
+    swap(array[r], array[i]);
+}
+// 每个数随机到每个位置的概率都为1/n。完美概率
+```
+
+### 交换
+
+```c++
+// 异或交换，最快
+void swap(int a, int b)
+{
+	int t = a ^ b;
+	a ^= t;
+    b ^= t;
+}
+// 计算交换
+void swap(int a, int b)
+{
+    int t = a + b;
+    a = t - a;
+    b = t - b;
+}
+// 普通交换
+void swap(int a, int b)
+{
+    int t = a;
+    a = b;
+    b = t;
+}
+```
+

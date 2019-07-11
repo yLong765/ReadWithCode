@@ -6,20 +6,17 @@
   * 相对于父物体的旋转角（欧拉角）
   * 次角度不能超过360度，如果要增量，改用Transform.Rotate
   * Unity将会将角度自动转换为Transform.localRotation的四元数角度中
-
 * Transform.TransformDirection(Vector3)
   * 将向量方向从本地空间转换为世界空间
   * 长度不变
   * 方向为主
-
 * Transform.TransformPoint(Vector3)
   * 将位置从本地空间转换为世界空间
   * 位置为主
   * Transform.InverseTransformPoint : 从世界转为本地
-
 * 2D图像导入设置Pixels-To-Units：因Unity最开始是3D引擎，2D后来才加入，所以Unity中的一个单位不一定是图像中的一个像素。Pixels-To-Units设置为1:1则为Unity的一图像对应一像素，建议使用默认的100:1(因物理引擎在1:1的状态下不能正常工作)
-
 * 销毁GameObject：为了显示场景中的对象，Unity需要在场景图中引用所有对象。因此即使移除代码中所有对GameObject的引用，它依然会被这个场景引用，以防止对象被自动销毁。因此，Unity提供了Destroy方法来告诉游戏引擎“将这个对象从场景中移除”。Unity重载了==操作符，当检查null的时候返回true。技术上，对象依然存在于内存中，但它可能不再存在，因此Unity让它显示为null。调用已销毁物体的GetInstanceID方法，就可以确认。
+* int num = Random.Range(num1, num2)：num1 <= num < num2 取值范围
 
 ## 美术资源的类型
 
