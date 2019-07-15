@@ -1,6 +1,8 @@
+[TOC]
+
 ## 数据结构C++版
 
-### [priority_queue](http://www.cplusplus.com/reference/queue/priority_queue/) 最大堆
+### [priority_queue](http://www.cplusplus.com/reference/queue/priority_queue/)
 
 #### 定义
 
@@ -13,11 +15,11 @@ priority_queue<int, vector<int>, greater<int> > //最小堆
 // 第三参数：less和greater是C++自带的大小排序方式，也可写方法进行自定义
 ```
 
-#### [set](http://www.cplusplus.com/reference/set/set/) 哈希表
+### [set](http://www.cplusplus.com/reference/set/set/)
 
-#### [map](http://www.cplusplus.com/reference/map/map/) 
+### [map](http://www.cplusplus.com/reference/map/map/) 
 
-#### [queue](http://www.cplusplus.com/reference/queue/queue/)
+### [queue](http://www.cplusplus.com/reference/queue/queue/)
 
-#### [vector](http://www.cplusplus.com/reference/vector/vector/)
+### [vector](http://www.cplusplus.com/reference/vector/vector/)
 
