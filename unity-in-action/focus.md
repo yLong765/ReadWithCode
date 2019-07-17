@@ -17,6 +17,9 @@
 * 2D图像导入设置Pixels-To-Units：因Unity最开始是3D引擎，2D后来才加入，所以Unity中的一个单位不一定是图像中的一个像素。Pixels-To-Units设置为1:1则为Unity的一图像对应一像素，建议使用默认的100:1(因物理引擎在1:1的状态下不能正常工作)
 * 销毁GameObject：为了显示场景中的对象，Unity需要在场景图中引用所有对象。因此即使移除代码中所有对GameObject的引用，它依然会被这个场景引用，以防止对象被自动销毁。因此，Unity提供了Destroy方法来告诉游戏引擎“将这个对象从场景中移除”。Unity重载了==操作符，当检查null的时候返回true。技术上，对象依然存在于内存中，但它可能不再存在，因此Unity让它显示为null。调用已销毁物体的GetInstanceID方法，就可以确认。
 * int num = Random.Range(num1, num2)：num1 <= num < num2 取值范围
+* SendMessage注意：C#这种强类型语言中使用面向对象编程时，需要知道目标类型才能和该对象通信，SendMessage的效率比调用已知类型的公有方法低
+* 直接调整position的值，碰撞检测无法工作
+* Sprite Renderer.Order in Layer：同Z轴情况下控制前后层级，值越大，就在上层
 
 ## 美术资源的类型
 
@@ -103,5 +106,11 @@ Blender | 支持FBX导出
 
 * 在场景中创建3D文本对象：TextMesh(TextMesh Pro更好)
   * 用Arial自体，增加FontSize为文本显示提供很多像素，利用缩放来把像素亚索到很小的空间（优化的有点迷，牺牲清晰度的优化）
-  * 
+
+### 动画
+
+* 核心：
+  * 动画剪辑：单个循环动画
+  * 动画控制器：合适播放动画的控制器
+    * Hsh Exit Time：允许在动画播放时切换
 
