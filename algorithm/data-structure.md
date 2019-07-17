@@ -23,3 +23,7 @@ priority_queue<int, vector<int>, greater<int> > //最小堆
 
 ### [vector](http://www.cplusplus.com/reference/vector/vector/)
 
+### Trie树
+
+
+
