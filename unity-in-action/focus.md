@@ -20,6 +20,10 @@
 * SendMessage注意：C#这种强类型语言中使用面向对象编程时，需要知道目标类型才能和该对象通信，SendMessage的效率比调用已知类型的公有方法低
 * 直接调整position的值，碰撞检测无法工作
 * Sprite Renderer.Order in Layer：同Z轴情况下控制前后层级，值越大，就在上层
+* 贴图的Texture Type设置在3D中默认为Texture，2D中默认为Sprite
+* LateUpdate：所有对象的Update都运行完之后才执行LateUpdate方法
+* 位置向量乘以四元数，结果是基于旋转的便宜位置。
+* Lerp(linear interpolation)线性插值：有专为四元数提供的插值Slerp(spherical linear interpolation)球形线性插值，对于更慢的变换，Slerp比Lerp表现的更好
 
 ## 美术资源的类型
 
@@ -114,3 +118,26 @@ Blender | 支持FBX导出
   * 动画控制器：合适播放动画的控制器
     * Hsh Exit Time：允许在动画播放时切换
 
+### GUI
+
+* HUD（平视显示）：使图形叠加在世界视图上
+* 立即模式：（OnGUI），在没帧显式发出绘制命令
+  * 可以在放置UI元素时看到当前UI的外观
+  * 容易使用自己的图像来定制UI
+* 保留模式：一次定义所有的视觉效果，之后系统就知道每帧绘制什么，不必再重新生命。
+
+### Canvas
+
+* 1单位 == 1像素
+* Render Mode
+  * Screen Space - Overlay：将UI渲染为摄像机视图顶部的2D图像
+  * Screen Space - Camera：将UI渲染在摄像机视图顶部，但UI元素可以旋转，可以有透视效果（UI中的粒子特效需要用这种方式）
+  * World Space：将画布放在场景中，UI是场景的一部分
+* Pixel Perfect：轻微调整图像位置，使图像更加清晰
+
+所有UI都有锚点（anchor）：是对象附加到画布或屏幕的点。它决定了计算对象的位置所依赖的点。
+
+* InputField
+  * OnEndEdit
+    * Static Paraneters：发送提前定义好的字符串
+    * Dynamic String：发送输入域中输入的内容
