@@ -94,6 +94,8 @@ private void OnDrawGizmos()
 }
 ```
 
+------
+
 ## Shader绘制
 
 ### 属性
@@ -144,7 +146,7 @@ fixed4 frag(fragmentInput i) : SV_Target
 }
 ```
 
-
+### 完整代码
 
 ```c++
 Shader "Unlit/SectorShader" 

@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 2772310456
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: aef1d6397518299f58d9fd7e75ed0465
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: de115c0587ef64dd44681cd09c7c23e4
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Art/Prefab1.prefab
+Dependencies: []

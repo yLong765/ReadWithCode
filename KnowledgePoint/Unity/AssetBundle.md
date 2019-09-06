@@ -1,5 +1,14 @@
 # AssetBundle
 
+包含非代码资产（如Models，Texture，Prefabs，Audio clips，Scenes）Unity可以在运行（run time）的时候加载。为了通过网络快速传输，可用（LZMA和LZ4）内置压缩算法压缩AssetBundles。
+
+## AssetBundle 有什么用？
+
+AssetBundle是磁盘中的实际文件，它的存档是一个容器，包含这两种类型的文件：
+
+- 序列化文件
+- 资源文件（二进制数据块）
+
 ------
 
 ## AssetBundle的分包策略
@@ -76,7 +85,7 @@ public class CreateAssetBundles
 
 * 普通AssetBundle结构：
 
-![AssetBundle Container](D:\Work\GitProgram\ReadWithCode\KnowledgePoint\Unity\Img\AssetBundle\AssetBundle Container.png)
+![AssetBundle Container](Imgs\AssetBundle\AssetBundle Container.png)
 
 * Scene AssetBundle：针对Scene的流加载优化
 
@@ -119,7 +128,7 @@ Assets: // 资源地址
 - Assets/Art/GameObject.prefab
 - Assets/Art/New Render Texture.renderTexture
 - Assets/Art/New Material.mat
-Dependencies: []
+Dependencies: [] // 依赖
 ```
 
 生成的Manifest Bundle清单信息
@@ -131,14 +140,119 @@ AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: asset1.a
-      Dependencies: {}
+      Dependencies: {} // 依赖
 ```
 
+### 依赖
+
+![例子](Imgs/AssetBundle/2.png)
+
+如果我们的工程中有图中的资源个一个，各个资源的引用关系也如图所示，GameObject的组建MeshRenderer引用Material，Material引用shader，Shader引用Texture。
+
+下面举例依赖的情况：
+
+1. GameObject，Material和Shader打包asset.a，Texture打包asset.b。asset.a包会依赖asset.b包，并且加载asset.a包的时候必须先加载asset.b包。下面是两个包的依赖项：
+
+   1. asset.a:
+
+   ```c++
+   Dependencies:
+   - D:Unity/Programs/AssetBundleTest/Assets/AssetBundles/asset.b
+   ```
+
+   2. asset.b:
+
+   ```c++
+   Dependencies: []
+   ```
+
+2. GameObject，Shader和Texture打包asset.a，Material打包asset.b。两个包互相依赖。下面是两个包的依赖项：
+
+   1. asset.a
+
+   ```c++
+   Dependencies:
+   - D:Unity/Programs/AssetBundleTest/Assets/AssetBundles/asset.b
+   ```
+
+   2. asset.b
+
+   ```c++
+   Dependencies:
+   - D:Unity/Programs/AssetBundleTest/Assets/AssetBundles/asset.a
+   ```
+
+3. Prefab1引用Material1和Material2。Prefab2也引用Material1和Material2。我们将Prefab1打入asset.a包，将Prefab2打入asset.b包。Material1和Material2不打包。则asset.a和asset.b包中都应该有Material1和Material2的副本。（实际测试没有）
+
+------
+
+## 加载AssetBundle
+
+### AssetBundle.LoadFromMemoryAsync
+
+此方法从一个字节数组中加载AssetBundle数据（数据为字节数组），如果是LZMA压缩格式的话，会在加载时解压，LZ4压缩格式则直接加载不解压。
+
+File.ReadAllBytes(path)：用字节方式读取数据
+
+### AssetBundle.LoadFromFile
+
+加载未压缩AssetBundle时非常高效。加载未压缩或LZ4压缩格式，将直接从磁盘加载AssetBundle。加载LZMA格式压缩包时，先解压，然后再加载到内存中。
+
+### UnityWebRequest
 
 
 
+```csharp
+IEnumerator UnityWebRequestLoadAssetBundleAndInstantiate()
+{
+    string url = "file:///" + Application.dataPath + "/AssetBundles/" + assetBundleName;
+    UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.GetAssetBundle(uri, 0); // 下载AssetBundle请求
+    yield return request.Send();
+    AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request); // 更高效的下载和解压AssetBundle
+    GameObject cube = bundle.LoadAsset<GameObject>();
+    Instantiate(cube);
+}
+```
 
+### 从AssetBundle加载资源
 
+通过上面三种加载AssetBundle的方式，将AssetBundle加载到内存中，接下来就要加载AssetBundle中的Asset，并且实例化到游戏中了
 
+#### 加载Asset
 
+```csharp
+// T：加载Asset的类型
+// bundle：AssetBundle对象
+// assetName：资源名
+
+// LoadAsset：加载一个资源
+T assetObject = bundle.LoadAsset<T>(assetName);
+
+// LoadAllAssets：加载AssetBundle中的全部资源
+Unity.Object[] assetObjectArray = bundle.LoadAllAssets();
+
+// LoadAssetAsync：异步加载一个资源
+AssetBundleRequest request = bundle.LoadAssetAsync<T>(assetName);
+yield return request;
+var assetObject = request.asset;
+
+// LoadAllAssetAsync：异步加载全部资源
+AssetBundleRequest request = bundle.LoadAllAssetsAsync();
+yield return request;
+var assetObjectArray = request.allAssets;
+```
+
+#### 加载AssetBundle Manifest
+
+处理AssetBundle的依赖时候，需要用到AssetBundleManifest对象。
+
+```csharp
+AssetBundleManifest manifest = bundle.LoadAsset<AssetBundleManifest>();
+```
+
+加载依赖项
+
+```
+string[] dependencies = manifest.GetAllDependencies("assetBundle");
+```
 
