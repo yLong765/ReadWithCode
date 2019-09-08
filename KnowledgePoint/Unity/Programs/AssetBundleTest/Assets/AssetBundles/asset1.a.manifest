@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1367475524
+CRC: 3709036717
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 57d6de61a1f907518e2f96dcc57fa9bb
+    Hash: 3f79fe94a80709e5a0151a92a25c1267
   TypeTreeHash:
     serializedVersion: 2
-    Hash: de115c0587ef64dd44681cd09c7c23e4
+    Hash: 44e097f3e49b53aade5f26c55f3512a9
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,5 +20,7 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 Assets:
+- Assets/Art/Shader1.shader
 - Assets/Art/Prefab2.prefab
-Dependencies: []
+Dependencies:
+- D:/Work/GitProgram/ReadWithCode/KnowledgePoint/Unity/Programs/AssetBundleTest/Assets/AssetBundles/asset.a

@@ -19,6 +19,16 @@ public class BuildAssetBundleEditor : EditorWindow
         {
             BuildAssetBundle();
         }
+
+        if (GUILayout.Button("LoadAsset"))
+        {
+            LoadAsset.LoadAssetAndInstantiate();
+        }
+
+        if (GUILayout.Button("LoadManifest"))
+        {
+            LoadAsset.LoadManifest();
+        }
     }
 
     private void BuildAssetBundle()
@@ -29,6 +39,5 @@ public class BuildAssetBundleEditor : EditorWindow
         }
         BuildPipeline.BuildAssetBundles(path, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
         GameObject go;
-        go.transform.localScale
     }
 }

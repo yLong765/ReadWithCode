@@ -247,12 +247,21 @@ var assetObjectArray = request.allAssets;
 处理AssetBundle的依赖时候，需要用到AssetBundleManifest对象。
 
 ```csharp
-AssetBundleManifest manifest = bundle.LoadAsset<AssetBundleManifest>();
-```
-
-加载依赖项
-
-```
+// 将AssetBundle的依赖加载出来
+AssetBundle assetBundle = AssetBundle.LoadFromFile(Path.Combine("Assets/AssetBundles", "AssetBundles"));
+// 加载manifest，名字固定为"AssetBundleManifest"
+AssetBundleManifest manifest = bundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+// 加载依赖数据
 string[] dependencies = manifest.GetAllDependencies("assetBundle");
+foreach (string dependency in dependencies)
+{
+    // 加载依赖的AssetBundle
+    AssetBundle.LoadFromFile(Path.Combine("Assets/AssetBundles", dependncy));
+}
 ```
 
+## 卸载AssetBundle
+
+### AssetBundle.Unload(bool)
+
+* AssetBundle.Unload(true)：卸载从AssetBundle中加载的所有GameObject（及其依赖项）。不包括实例化的GameObject（实例化的GameObject周期不归AssetBundle管理）

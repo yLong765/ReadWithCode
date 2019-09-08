@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2772310456
+CRC: 2315687572
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: aef1d6397518299f58d9fd7e75ed0465
+    Hash: f5185834d075f7186b99e289bcea8cc7
   TypeTreeHash:
     serializedVersion: 2
-    Hash: de115c0587ef64dd44681cd09c7c23e4
+    Hash: d4a9121e9633709ddbd227f34270f42f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -19,6 +19,9 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 84
+  Script: {instanceID: 0}
 Assets:
+- Assets/Art/RenderTexture1.renderTexture
 - Assets/Art/Prefab1.prefab
 Dependencies: []

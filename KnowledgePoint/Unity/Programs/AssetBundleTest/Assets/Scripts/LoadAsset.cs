@@ -1,20 +1,24 @@
 ﻿using System.IO;
 using UnityEngine;
 
-public class LoadAsset : MonoBehaviour
+public class LoadAsset
 {
-    private void Update()
+    public static void LoadAssetAndInstantiate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        var assetbundle = AssetBundle.LoadFromFile(Path.Combine("Assets/AssetBundles", "asset.a"));
+        var gameObject = assetbundle.LoadAsset<GameObject>("prefab1");
+        Object.Instantiate(gameObject);
+    }
+
+    public static void LoadManifest()
+    {
+        var assetbundle = AssetBundle.LoadFromFile(Path.Combine("Assets/AssetBundles", "AssetBundles"));
+        AssetBundleManifest manifest = assetbundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+        string[] dependencies = manifest.GetAllDependencies("asset1.a");
+        foreach (var dependency in dependencies)
         {
-            var assetbundle = AssetBundle.LoadFromFile(Path.Combine("Assets/AssetBundles", "a.a"));
-            var gameObject = assetbundle.LoadAsset<GameObject>("prefab1");
-            Instantiate(gameObject);
-        }
-        if (Input.GetKeyDown(KeyCode.W)
-        {
-            var assetbundle = AssetBundle.LoadFromFile(Path.Combine("Assets/AssetBundles", "a.a"));
-            AssetBundleManifest manifest = assetbundle.LoadAsset<AssetBundleManifest>()
+            Debug.Log(Path.Combine("Assets/AssetBundles", dependency));
+            //AssetBundle.LoadFromFile(Path.Combine("Assets/AssetBundles", dependency));
         }
     }
 }
