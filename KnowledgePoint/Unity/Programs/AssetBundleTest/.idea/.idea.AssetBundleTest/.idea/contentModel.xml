@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Administrator\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Administrator\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_AssetBundleTest.1269492022.00" t="ExcludeRecursive" />
-    <e p="D:\Work\GitProgram\ReadWithCode\KnowledgePoint\Unity\Programs\AssetBundleTest" t="IncludeRecursive">
+    <e p="C:\Users\yangyinlong01\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\yangyinlong01\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_AssetBundleTest.-1740134899.00" t="ExcludeRecursive" />
+    <e p="D:\Work\svn\ReadWithCode\KnowledgePoint\Unity\Programs\AssetBundleTest" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="AssetBundleTest.sln" t="IncludeFlat" />
