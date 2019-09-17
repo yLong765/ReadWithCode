@@ -264,4 +264,20 @@ foreach (string dependency in dependencies)
 
 ### AssetBundle.Unload(bool)
 
-* AssetBundle.Unload(true)：卸载从AssetBundle中加载的所有GameObject（及其依赖项）。不包括实例化的GameObject（实例化的GameObject周期不归AssetBundle管理）
+* AssetBundle.Unload(true)：卸载从AssetBundle中加载的所有GameObject（及其依赖项）。不包括实例化的GameObject（实例化的GameObject周期不归AssetBundle管理）。实例化的Material会被卸载并销毁，Texture同理。
+* AssetBundle.Unload(false)：破坏Material与其实例的链接，不会回收实例化的Material。如果再调用AssetBundle.LoadAsset()再次加载此Material则会实例化一个新材质，并不会链接直接未被销毁的材质。
+
+![Unload(false)](Imgs/AssetBundle/Unload1.png)
+
+![UnloadAndCreateNewMaterial](Imgs/AssetBundle/Unload2.png)
+
+推荐使用AssetBundle.Unload(true)卸载来确保对象不会重复。常用两种卸载时间点：
+
+* 在生命周期中的明确切换点，例如升级或屏幕加载期间。
+* 维护单个对象的引用计数，并仅在所有对象未使用时卸载AssetBundle。
+
+使用AssetBundle.Unload(false)后卸载内存留存对象的方法：
+
+* 消除场景中和代码中对不需要的Object的所有引用后，调用Resources.UnloadUnusedAssets。
+* 非添加性的加载场景(AddScene)，Unity会自动卸载所有场景对象并自动调用Resources.UnloadUnusedAssets。
+
